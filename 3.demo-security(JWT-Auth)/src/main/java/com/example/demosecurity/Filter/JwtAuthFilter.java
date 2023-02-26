@@ -46,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             // then validate the user-detail subject which i have and passed to the jwt-service.
         }
 
-        // Validate Token and Set Spring Security
+        // Validate user from Token and Set Spring Security
         if(userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 
