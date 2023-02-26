@@ -1,7 +1,7 @@
 package com.example.demosecurity.Service;
 
-import com.example.demosecurity.Entity.UserInfo;
-import com.example.demosecurity.Repository.UserInfoRepository;
+import com.example.demosecurity.Entity.User;
+import com.example.demosecurity.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,20 +11,20 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserInfoRepository repository;
+    UserRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public List<UserInfo> users(){
+    public List<User> users(){
         return repository.findAll();
     }
 
-    public UserInfo user(int id){
+    public User user(int id){
         return repository.findById(id);
     }
 
-    public String addUser(UserInfo userInfo) {
+    public String addUser(User userInfo) {
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         repository.save(userInfo);
 

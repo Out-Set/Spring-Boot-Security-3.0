@@ -1,6 +1,6 @@
 package com.example.demosecurity.Config;
 
-import com.example.demosecurity.Entity.UserInfo;
+import com.example.demosecurity.Entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,14 +10,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserInfoUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private String name;
     private String password;
     private List<GrantedAuthority> authorities;
 
     // Convert userInfo into userDetails
-    public UserInfoUserDetails(UserInfo userInfo) {
+    public CustomUserDetails(User userInfo) {
         name = userInfo.getName();
         password = userInfo.getPassword();
         authorities = Arrays.stream(userInfo.getRoles().split(","))

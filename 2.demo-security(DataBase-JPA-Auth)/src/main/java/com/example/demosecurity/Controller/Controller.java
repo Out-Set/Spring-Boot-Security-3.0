@@ -1,6 +1,6 @@
 package com.example.demosecurity.Controller;
 
-import com.example.demosecurity.Entity.UserInfo;
+import com.example.demosecurity.Entity.User;
 import com.example.demosecurity.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +23,7 @@ public class Controller {
 
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")   // // Assigning  admin-role
-    public List<UserInfo> users(){
+    public List<User> users(){
         return service.users();
     }
 
@@ -35,7 +35,7 @@ public class Controller {
 
 
     @PostMapping("/new")
-    public String assNewUser(@RequestBody UserInfo userInfo) {
+    public String assNewUser(@RequestBody User userInfo) {
         return service.addUser(userInfo);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.demosecurity.Filter;
 
-import com.example.demosecurity.Config.UserInfoUserDetailsService;
+import com.example.demosecurity.Config.CustomUserDetailsService;
 import com.example.demosecurity.Service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,7 +23,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private JwtService jwtService;
 
     @Autowired
-    private UserInfoUserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -36,6 +36,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String token = null;
         String userName = null;
 
+        // Getting JWT token and userName from request
         if(authHeader != null && authHeader.startsWith("Bearer")) {
             token = authHeader.substring(7);
 
@@ -45,6 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             // then validate the user-detail subject which i have and passed to the jwt-service.
         }
 
+        // Validate Token and Set Spring Security
         if(userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 

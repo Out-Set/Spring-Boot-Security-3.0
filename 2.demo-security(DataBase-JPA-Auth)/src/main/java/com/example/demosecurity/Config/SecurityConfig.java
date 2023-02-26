@@ -21,7 +21,7 @@ public class SecurityConfig {
     // Authentication
     public UserDetailsService userDetailsService() {
 
-        return new UserInfoUserDetailsService();
+        return new CustomUserDetailsService();
 
 
         // Now the request will goto the UserInfoUserDetailsService class, and it will fetch the user

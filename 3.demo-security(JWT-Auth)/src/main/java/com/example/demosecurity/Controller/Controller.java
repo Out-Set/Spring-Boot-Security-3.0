@@ -1,7 +1,7 @@
 package com.example.demosecurity.Controller;
 
 import com.example.demosecurity.Dto.AuthRequest;
-import com.example.demosecurity.Entity.UserInfo;
+import com.example.demosecurity.Entity.User;
 import com.example.demosecurity.Service.JwtService;
 import com.example.demosecurity.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class Controller {
 
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")   // // Assigning  admin-role
-    public List<UserInfo> users(){
+    public List<User> users(){
         return service.users();
     }
 
@@ -48,7 +48,7 @@ public class Controller {
 
 
     @PostMapping("/new")
-    public String assNewUser(@RequestBody UserInfo userInfo) {
+    public String assNewUser(@RequestBody User userInfo) {
         return service.addUser(userInfo);
     }
 

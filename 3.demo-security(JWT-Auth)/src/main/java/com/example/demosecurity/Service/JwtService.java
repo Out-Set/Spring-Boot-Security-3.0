@@ -35,7 +35,7 @@ public class JwtService {
         return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
     }
 
-    // Checking, if Token is Expired
+    // Checking, if Token has Expired
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
@@ -44,15 +44,6 @@ public class JwtService {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUserName(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
-
-
-
-
-    // Generate Token
-    public String generateToken(String userName) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userName);
     }
 
     // Create Token
@@ -65,5 +56,9 @@ public class JwtService {
                 .signWith(SignatureAlgorithm.HS256, SECRET).compact();
     }
 
-
+    // Generate Token
+    public String generateToken(String userName) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, userName);
+    }
 }
